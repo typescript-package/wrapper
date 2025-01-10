@@ -1,6 +1,6 @@
 {
   "name": "@typescript-package/wrapper",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "wwwdev.io <dev@wwwdev.io>",
   "description": "A lightweight TypeScript library to wrap the text with the opening and closing chars.",
   "license": "MIT",
