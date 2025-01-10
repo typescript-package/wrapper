@@ -188,6 +188,19 @@ export class Wrapper<
   }
 
   /**
+   * The method returns the text of the `Wrapper` object wrapped by the given `opening` and `closing` chars.
+   * @param opening The opening chars of a generic type variable `TextOpening` to wrap the text of the `Wrapper` instance.
+   * @param closing The closing chars of a generic type variable `TextClosing` to wrap the text of the `Wrapper` instance.
+   * @returns The return value is the text wrapped by given `opening` and closing `chars` of generic type `Wrapped`.
+   */
+  public rewrap<TextOpening extends string, TextClosing extends string>(
+    opening: TextOpening,
+    closing: TextClosing
+  ): Wrapped<TextOpening, Text, TextClosing> {
+    return new Wrap(opening, closing, this.text).valueOf();
+  }
+
+  /**
    * Replaces the closing chars of the `Wrapper` object in the text of the `Wrapper` object with the given `closing` chars.
    * The replacement succeeds if the closing characters exist at the end of the text.
    * @param closing The closing chars of `string` to replace in the text(part of the primitive value).
@@ -221,19 +234,6 @@ export class Wrapper<
     closing: string = this.closing
   ): string {
     return Wrapper.unwrap(this.text, opening, closing);
-  }
-
-  /**
-   * The method returns the text of the `Wrapper` object wrapped by the given `opening` and `closing` chars.
-   * @param opening The opening chars of a generic type variable `TextOpening` to wrap the text of the `Wrapper` instance.
-   * @param closing The closing chars of a generic type variable `TextClosing` to wrap the text of the `Wrapper` instance.
-   * @returns The return value is the text wrapped by given `opening` and closing `chars` of generic type `Wrapped`.
-   */
-  public textWrap<TextOpening extends string, TextClosing extends string>(
-    opening: TextOpening,
-    closing: TextClosing
-  ): Wrapped<TextOpening, Text, TextClosing> {
-    return new Wrap(opening, closing, this.text).valueOf();
   }
 
   /**
@@ -324,7 +324,7 @@ export class Wrapper<
     opening: TextOpening,
     closing: TextClosing
   ): Wrapped<Opening, Wrapped<TextOpening, Text, TextClosing>, Closing> {
-    return `${this.opening}${this.textWrap(opening, closing)}${this.closing}`;
+    return `${this.opening}${this.rewrap(opening, closing)}${this.closing}`;
   }
   //#endregion instance public methods.
 }
